@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Contact Form</title>
+    <style>
+        /* Simple styling */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Contact Form</h2>
+    <div class="form-container">
+        <form id="contactForm">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Your message" required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="thankYouMessage" class="message hidden">
+            Thank you for reaching out! We will get back to you soon.
+        </div>
+
+        <button id="toggleButton" class="hidden">Show Message</button>
+    </div>
+
+    <script>
+        // Add event listener to the form submission
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            // Validate form fields
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let message = document.getElementById("message").value;
+
+            // Basic validation check
+            if (name && email && message) {
+                // Display thank you message and hide form
+                document.getElementById("thankYouMessage").classList.remove("hidden");
+                document.getElementById("contactForm").reset();
+            } else {
+                alert("Please fill in all fields!");
+            }
+        });
+
+        // Add event listener to the toggle button
+        document.getElementById("toggleButton").addEventListener("click", function() {
+            alert("The button was clicked!");
+        });
+
+        // Display the toggle button after form submission (as an example of an interactive element)
+        document.getElementById("thankYouMessage").addEventListener("transitionend", function() {
+            document.getElementById("toggleButton").classList.remove("hidden");
+        });
+    </script>
+
+</body>
+</html>
